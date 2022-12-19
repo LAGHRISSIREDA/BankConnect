@@ -1,0 +1,4 @@
+spring.datasource.username = postgres
+spring.datasource.password= password
+spring.datasource.url=jdbc:postgresql://localhost:5432/springboot
+spring.jpa.hibernate.ddl-auto=create-drop
