@@ -1,8 +1,13 @@
 package com.codesigne.services.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codesigne.entities.UserEntity;
@@ -20,8 +25,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	//@Autowired
-	//BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
 	Utils util;
@@ -37,14 +42,21 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userDto, userEntity);
 		
-		//bCryptPasswordEncoder.encode(userDto.getPassword())
-		userEntity.setEncryptedPassword("testtest");
+		//
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		userEntity.setUserId(util.generateUserId(32));
 		UserEntity newUser = userRepository.save(userEntity);
 		
 		UserDto user = new UserDto();
 		BeanUtils.copyProperties(newUser, user);
 		return user;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null)throw new UsernameNotFoundException(email);
+		return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
 	}
 
 }

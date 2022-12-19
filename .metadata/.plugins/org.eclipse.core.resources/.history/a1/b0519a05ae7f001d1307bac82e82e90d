@@ -1,0 +1,5 @@
+package com.codesigne.requests;
+
+public class UserLoginRequest {
+
+}
