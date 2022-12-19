@@ -2,7 +2,7 @@ package com.codesigne.services.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codesigne.entities.UserEntity;
@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	//@Autowired
-	//BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
 	Utils util;
@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userDto, userEntity);
 		
-		//bCryptPasswordEncoder.encode(userDto.getPassword())
-		userEntity.setEncryptedPassword("testtest");
+		//
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		userEntity.setUserId(util.generateUserId(32));
 		UserEntity newUser = userRepository.save(userEntity);
 		
