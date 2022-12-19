@@ -1,0 +1,5 @@
+package com.codesigne.entities;
+
+public class UserEntity {
+
+}

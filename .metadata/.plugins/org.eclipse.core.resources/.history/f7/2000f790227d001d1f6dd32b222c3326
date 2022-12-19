@@ -1,0 +1,8 @@
+package com.codesigne.entities;
+
+import java.io.Serializable;
+
+public class UserEntity implements Serializable{
+	
+	
+}

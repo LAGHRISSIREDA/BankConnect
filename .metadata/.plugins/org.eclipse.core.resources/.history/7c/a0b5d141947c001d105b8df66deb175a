@@ -1,0 +1,5 @@
+package com.codesigne.shared.dto;
+
+public class UserDto {
+
+}

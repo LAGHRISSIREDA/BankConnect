@@ -1,0 +1,30 @@
+package com.codesigne.entities;
+
+import java.io.Serializable;
+
+
+
+public class UserEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4735836398504946340L;
+	
+	private Long id;
+	private String userId;
+	private String firstname;
+	private String lastname;
+	private String adress;
+	private String email;
+	private String phone;
+	private Double money;
+	private String typecompte;
+	private String status;
+	private String password;
+	private String encryptedPassword;
+	private String emailVerificationToken;
+	private Boolean emailVerificationStatus;
+	
+	
+}

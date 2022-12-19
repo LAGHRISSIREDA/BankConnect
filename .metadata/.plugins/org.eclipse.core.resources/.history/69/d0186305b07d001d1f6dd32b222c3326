@@ -1,0 +1,17 @@
+package com.codesigne.security;
+
+
+
+
+
+
+@EnableWebSecurity
+public class WebSecurity{
+	
+	
+	
+
+	
+	
+
+}
