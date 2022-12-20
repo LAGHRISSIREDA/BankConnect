@@ -1,0 +1,6 @@
+package com.codesigne.security;
+
+public class SecurityConstants {
+	
+	public static final long EXPIRATION = 864000000;
+}
