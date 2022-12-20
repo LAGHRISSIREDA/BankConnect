@@ -1,0 +1,5 @@
+package com.codesigne;
+
+public class SpringApplicationContext extends ApplicationContextAwareProcessor {
+
+}
