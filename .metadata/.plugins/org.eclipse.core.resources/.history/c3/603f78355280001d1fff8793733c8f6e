@@ -1,0 +1,10 @@
+package com.codesigne.services;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.codesigne.shared.dto.UserDto;
+
+public interface UserService extends UserDetailsService{
+
+	UserDto createUser(UserDto userDto);
+}

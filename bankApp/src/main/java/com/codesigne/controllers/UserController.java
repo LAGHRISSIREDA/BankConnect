@@ -1,7 +1,10 @@
 package com.codesigne.controllers;
 
+
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,8 @@ import com.codesigne.services.UserService;
 import com.codesigne.shared.dto.UserDto;
 
 
+
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,8 +29,9 @@ public class UserController {
 	UserService userService;
 	
 	@GetMapping
-	public String getUser() {
-		return "hello from get ";
+	public ResponseEntity<String> getUser() {
+		System.out.println("inside get users");
+		return ResponseEntity.ok("hello from get");
 	}
 	
 	@PostMapping
