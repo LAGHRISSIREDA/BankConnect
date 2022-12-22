@@ -7,7 +7,7 @@ Banque centrale du Maroc.
 Vous pouvez trouver la conception [conception]([https://pip.pypa.io/en/stable/](https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing)) en cliquant dur le mot Conception.
 
 ```bash
-pip install foobar
+conception install foobar
 ```
 
 ## Contexte
