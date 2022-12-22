@@ -50,7 +50,7 @@ public class WebSecurityConfig {
     
     
     protected AuthenticationFilter getAuthenticationFilter()throws Exception{
-    	final AuthenticationFilter filter =new  AuthenticationFilter(authenticationManager(null));
+    	final AuthenticationFilter filter =new  AuthenticationFilter(getAuthenticationFilter());
     	filter.setFilterProcessesUrl("/users/login");
     	return filter;
     }
