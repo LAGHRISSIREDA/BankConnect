@@ -1,4 +1,4 @@
-##################################################### Banque centrale du Maroc (BankConnect)  ##########################################################
+#Banque centrale du Maroc (BankConnect)
 
 #Diagramme de Classe
 URL : https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing
