@@ -43,8 +43,16 @@ public class WebSecurityConfig {
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new AuthenticationFilter(authenticationManager(null)));
+                .addFilter(getAuthenticationFilter())
+                .addFilter(new AuthorizationFilter(authenticationManager(null)));
         return http.build();
+    }
+    
+    
+    protected AuthenticationFilter getAuthenticationFilter()throws Exception{
+    	final AuthenticationFilter filter =new  AuthenticationFilter(authenticationManager(null));
+    	filter.setFilterProcessesUrl("/users/login");
+    	return filter;
     }
     
     
