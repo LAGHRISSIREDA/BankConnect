@@ -6,13 +6,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity(name = "account")
+public class AccountEntity implements Serializable {
 
-@Entity(name = "users")
-public class UserEntity implements Serializable {
-
-    /**
-     *
-     */
     @Serial
     private static final long serialVersionUID = -4735836398504946340L;
 
@@ -44,6 +40,9 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, length = 50)
     private String typecompte;
 
+    @Column(nullable = false, length = 50)
+    private String status;
+
     @Column(nullable = false)
     private String encryptedPassword;
 
@@ -58,16 +57,11 @@ public class UserEntity implements Serializable {
 
 
     //getters and setters =============================================================
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -135,6 +129,14 @@ public class UserEntity implements Serializable {
         this.typecompte = typecompte;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getEncryptedPassword() {
         return encryptedPassword;
     }
@@ -166,6 +168,5 @@ public class UserEntity implements Serializable {
 //    public void setTransactionEntities(List<TransactionEntity> transactionEntities) {
 //        this.transactionEntities = transactionEntities;
 //    }
-
 
 }

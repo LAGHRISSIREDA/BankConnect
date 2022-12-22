@@ -6,13 +6,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity(name = "agent")
+public class AgentEntity implements Serializable {
 
-@Entity(name = "users")
-public class UserEntity implements Serializable {
-
-    /**
-     *
-     */
     @Serial
     private static final long serialVersionUID = -4735836398504946340L;
 
@@ -21,7 +17,7 @@ public class UserEntity implements Serializable {
     private long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String agentId;
 
     @Column(nullable = false, length = 50)
     private String firstname;
@@ -29,22 +25,10 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, length = 50)
     private String lastname;
 
-    @Column(nullable = false, length = 200)
-    private String adress;
-
-    @Column(nullable = false, length = 120, unique = true)
+    @Column(nullable = false, length = 200, unique = true)
     private String email;
 
     @Column(nullable = false, length = 50)
-    private String phone;
-
-    @Column(nullable = false)
-    private Double money;
-
-    @Column(nullable = false, length = 50)
-    private String typecompte;
-
-    @Column(nullable = false)
     private String encryptedPassword;
 
     @Column(nullable = true)
@@ -53,30 +37,25 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private Boolean emailVerificationStatus = false;
 
-//    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "agentEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private List<TransactionEntity> transactionEntities;
-
 
     //getters and setters =============================================================
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getAgentId() {
+        return agentId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAgentId(String agentId) {
+        this.agentId = agentId;
     }
 
     public String getFirstname() {
@@ -95,44 +74,12 @@ public class UserEntity implements Serializable {
         this.lastname = lastname;
     }
 
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Double getMoney() {
-        return money;
-    }
-
-    public void setMoney(Double money) {
-        this.money = money;
-    }
-
-    public String getTypecompte() {
-        return typecompte;
-    }
-
-    public void setTypecompte(String typecompte) {
-        this.typecompte = typecompte;
     }
 
     public String getEncryptedPassword() {
