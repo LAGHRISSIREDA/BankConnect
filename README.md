@@ -1,10 +1,21 @@
-#Banque centrale du Maroc (BankConnect)
+# BankConnect
 
-#Diagramme de Classe
-URL : https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing
------------------------------------------------------------------------------
-#Contexte Du Project
-Pour un besoin urgent, la banque centrale du Maroc va mettre en place un service nommée « Bank Connect » pour simplifier et automatiser le système bancaire auprès des marocains Cette application web va permettre de Créer un compte pour les nouveaux client, ce dernier est obliger d’envoyer une copie de CIN scannée via le formulaire d’inscription en plus de fournir ses informations nom, prénom, adresse, adresse email et le numéro de téléphone qui doit être confirmé par sms contenant un code de 5 chiffres valable 3 min
+Banque centrale du Maroc.
+
+## Conception(Diagramme de classe)
+
+Vous pouvez trouver la conception [conception]([https://pip.pypa.io/en/stable/](https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing)) en cliquant dur le mot Conception.
+
+```bash
+pip install foobar
+```
+
+## Contexte
+
+```python
+import foobar
+
+# Pour un besoin urgent, la banque centrale du Maroc va mettre en place un service nommée « Bank Connect » pour simplifier et automatiser le système bancaire auprès des marocains Cette application web va permettre de Créer un compte pour les nouveaux client, ce dernier est obliger d’envoyer une copie de CIN scannée via le formulaire d’inscription en plus de fournir ses informations nom, prénom, adresse, adresse email et le numéro de téléphone qui doit être confirmé par sms contenant un code de 5 chiffres valable 3 min
 
 Chaque nouveau compte est inactif, l'agent qui va s'occuper (via son dashboard) de l'activation de l'ouvertures des comptes bancaires
 
@@ -36,3 +47,4 @@ Sécuriser votre API en utilisant Spring Security et JWT
 
 Enregistrez vos informations dans une base de données PostgreSQL
 
+```
