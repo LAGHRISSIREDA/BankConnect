@@ -4,10 +4,10 @@ Banque centrale du Maroc.
 
 ## Conception(Diagramme de classe)
 
-Vous pouvez trouver la conception [conception]([https://pip.pypa.io/en/stable/](https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing)) en cliquant dur le mot Conception.
+Vous pouvez trouver la conception [pip]([https://pip.pypa.io/en/stable/](https://drive.google.com/file/d/1_Lc5SF1mMEdhJxcHV-iCXJ2CXPdLnSqy/view?usp=sharing)) en cliquant dur le mot pip.
 
 ```bash
-conception install foobar
+pip install foobar
 ```
 
 ## Contexte
