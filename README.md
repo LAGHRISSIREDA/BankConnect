@@ -8,8 +8,7 @@ Vous pouvez trouver la [conception](https://drive.google.com/file/d/1_Lc5SF1mMEd
 
 ## Contexte
 
-```python
-import foobar
+```
 
 # Pour un besoin urgent, la banque centrale du Maroc va mettre en place un service nommée « Bank Connect » pour simplifier et automatiser le système bancaire auprès des marocains Cette application web va permettre de Créer un compte pour les nouveaux client, ce dernier est obliger d’envoyer une copie de CIN scannée via le formulaire d’inscription en plus de fournir ses informations nom, prénom, adresse, adresse email et le numéro de téléphone qui doit être confirmé par sms contenant un code de 5 chiffres valable 3 min
 
