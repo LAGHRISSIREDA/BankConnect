@@ -1,6 +1,7 @@
 package com.codesigne.security;
 
 
+import com.codesigne.services.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -15,27 +16,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.codesigne.services.impl.UserServiceImpl;
-
-
-
-
-
-
-
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-   private final BCryptPasswordEncoder bCryptPasswordEncoder;
-   private final UserServiceImpl userServiceImpl;
-   private final AuthorizationFilter authorizationFilter;
-   
-   public WebSecurityConfig(UserServiceImpl userServiceImpl,BCryptPasswordEncoder bCryptPasswordEncoder,@Lazy AuthorizationFilter authorizationFilter) {
-	   this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	   this.userServiceImpl = userServiceImpl;
-	   this.authorizationFilter = authorizationFilter;
-   }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserServiceImpl userServiceImpl;
+    private final AuthorizationFilter authorizationFilter;
+
+    public WebSecurityConfig(UserServiceImpl userServiceImpl, BCryptPasswordEncoder bCryptPasswordEncoder, @Lazy AuthorizationFilter authorizationFilter) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userServiceImpl = userServiceImpl;
+        this.authorizationFilter = authorizationFilter;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -43,7 +36,7 @@ public class WebSecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL)
+                .requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL, "/accounts")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -51,31 +44,29 @@ public class WebSecurityConfig {
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-    
-    
-    protected AuthenticationFilter getAuthenticationFilter()throws Exception{
-    	final AuthenticationFilter filter =new  AuthenticationFilter(authenticationManager(null));
-    	filter.setFilterProcessesUrl("/users/login");
-    	return filter;
+
+    protected AuthenticationFilter getAuthenticationFilter() throws Exception {
+        final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(null));
+        filter.setFilterProcessesUrl("/users/login");
+        return filter;
     }
-    
-    
+
     public void configure(AuthenticationManagerBuilder auth) {
-    	auth.authenticationProvider(daoAuthenticationProvider());
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-    
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-    	DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    	provider.setPasswordEncoder(bCryptPasswordEncoder);
-    	provider.setUserDetailsService(userServiceImpl);
-    	return provider;
-    }	
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        provider.setUserDetailsService(userServiceImpl);
+        return provider;
+    }
 
 
 }

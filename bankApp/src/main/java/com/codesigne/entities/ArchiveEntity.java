@@ -1,9 +1,13 @@
 package com.codesigne.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity(name = "archive")
 public class ArchiveEntity implements Serializable {
@@ -16,10 +20,10 @@ public class ArchiveEntity implements Serializable {
     private String archiveId;
 
     @Column(nullable = false, name = "id_sender")
-    private String idDestinateure;
+    private String idSender;
 
     @Column(nullable = false, name = "id_recipient")
-    private String IdDestinataire;
+    private String idRecipient;
 
     @Column(nullable = false)
     private double money;
@@ -38,20 +42,28 @@ public class ArchiveEntity implements Serializable {
         this.id = id;
     }
 
-    public String getIdDestinateure() {
-        return idDestinateure;
+    public String getArchiveId() {
+        return archiveId;
     }
 
-    public void setIdDestinateure(String idDestinateure) {
-        this.idDestinateure = idDestinateure;
+    public void setArchiveId(String archiveId) {
+        this.archiveId = archiveId;
     }
 
-    public String getIdDestinataire() {
-        return IdDestinataire;
+    public String getIdSender() {
+        return idSender;
     }
 
-    public void setIdDestinataire(String idDestinataire) {
-        IdDestinataire = idDestinataire;
+    public void setIdSender(String idSender) {
+        this.idSender = idSender;
+    }
+
+    public String getIdRecipient() {
+        return idRecipient;
+    }
+
+    public void setIdRecipient(String idRecipient) {
+        this.idRecipient = idRecipient;
     }
 
     public double getMoney() {
@@ -70,4 +82,24 @@ public class ArchiveEntity implements Serializable {
         this.date = date;
     }
 
+//    public TransactionEntity getTransactionEntity() {
+//        return transactionEntity;
+//    }
+//
+//    public void setTransactionEntity(TransactionEntity transactionEntity) {
+//        this.transactionEntity = transactionEntity;
+//    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArchiveEntity that)) return false;
+        return id == that.id && Double.compare(that.money, money) == 0 && Objects.equals(archiveId, that.archiveId) && Objects.equals(idSender, that.idSender) && Objects.equals(idRecipient, that.idRecipient) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, archiveId, idSender, idRecipient, money, date);
+    }
 }

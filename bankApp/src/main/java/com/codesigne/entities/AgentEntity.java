@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "agent")
 public class AgentEntity implements Serializable {
@@ -115,4 +116,15 @@ public class AgentEntity implements Serializable {
 //    }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AgentEntity that)) return false;
+        return id == that.id && Objects.equals(agentId, that.agentId) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(email, that.email) && Objects.equals(encryptedPassword, that.encryptedPassword) && Objects.equals(emailVerificationToken, that.emailVerificationToken) && Objects.equals(emailVerificationStatus, that.emailVerificationStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, agentId, firstname, lastname, email, encryptedPassword, emailVerificationToken, emailVerificationStatus);
+    }
 }

@@ -1,10 +1,13 @@
 package com.codesigne.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "account")
 public class AccountEntity implements Serializable {
@@ -18,6 +21,9 @@ public class AccountEntity implements Serializable {
 
     @Column(nullable = false)
     private String userId;
+
+    @Column(nullable = false)
+    private String accountNumber;
 
     @Column(nullable = false, length = 50)
     private String firstname;
@@ -37,26 +43,23 @@ public class AccountEntity implements Serializable {
     @Column(nullable = false)
     private Double money;
 
-    @Column(nullable = false, length = 50)
-    private String typecompte;
-
-    @Column(nullable = false, length = 50)
-    private String status;
-
     @Column(nullable = false)
     private String encryptedPassword;
 
-    @Column(nullable = true)
-    private String emailVerificationToken;
+    @Column(nullable = false, length = 50)
+    private String typecompte;
 
-    @Column(nullable = false)
-    private Boolean emailVerificationStatus = false;
 
-//    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "accountEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private List<TransactionEntity> transactionEntities;
+//
+//    @OneToOne(mappedBy = "accountEntity", cascade = CascadeType.ALL)
+//    private UserEntity userEntity;
 
 
     //getters and setters =============================================================
+
+
     public long getId() {
         return id;
     }
@@ -71,6 +74,22 @@ public class AccountEntity implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     public String getFirstname() {
@@ -129,44 +148,15 @@ public class AccountEntity implements Serializable {
         this.typecompte = typecompte;
     }
 
-    public String getStatus() {
-        return status;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccountEntity that)) return false;
+        return id == that.id && Objects.equals(userId, that.userId) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(adress, that.adress) && Objects.equals(email, that.email) && Objects.equals(phone, that.phone) && Objects.equals(money, that.money) && Objects.equals(typecompte, that.typecompte);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, firstname, lastname, adress, email, phone, money, typecompte);
     }
-
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
-
-    public String getEmailVerificationToken() {
-        return emailVerificationToken;
-    }
-
-    public void setEmailVerificationToken(String emailVerificationToken) {
-        this.emailVerificationToken = emailVerificationToken;
-    }
-
-    public Boolean getEmailVerificationStatus() {
-        return emailVerificationStatus;
-    }
-
-    public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
-        this.emailVerificationStatus = emailVerificationStatus;
-    }
-
-//    public List<TransactionEntity> getTransactionEntities() {
-//        return transactionEntities;
-//    }
-//
-//    public void setTransactionEntities(List<TransactionEntity> transactionEntities) {
-//        this.transactionEntities = transactionEntities;
-//    }
-
 }

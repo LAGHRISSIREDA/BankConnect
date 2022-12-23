@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity(name = "transaction")
 public class TransactionEntity implements Serializable {
@@ -35,6 +36,9 @@ public class TransactionEntity implements Serializable {
 //
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private ArchiveEntity archiveEntity;
+//
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private AccountEntity accountEntity;
 
     //getters and setters =============================================================
     public long getId() {
@@ -94,5 +98,15 @@ public class TransactionEntity implements Serializable {
 //    }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TransactionEntity that)) return false;
+        return id == that.id && Double.compare(that.money, money) == 0 && Objects.equals(transactionId, that.transactionId) && Objects.equals(idDestinataire, that.idDestinataire) && Objects.equals(date, that.date) && Objects.equals(status, that.status);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, transactionId, idDestinataire, money, date, status);
+    }
 }

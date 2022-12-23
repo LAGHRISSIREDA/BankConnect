@@ -6,7 +6,7 @@ public class TransactionRequest {
 
     private double money;
     private LocalDateTime date;
-    private String status;
+    private String idDestinataire;
 
     //getters and setters ==================================================
 
@@ -26,12 +26,12 @@ public class TransactionRequest {
         this.date = date;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIdDestinataire() {
+        return idDestinataire;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIdDestinataire(String idDestinataire) {
+        this.idDestinataire = idDestinataire;
     }
 
 
