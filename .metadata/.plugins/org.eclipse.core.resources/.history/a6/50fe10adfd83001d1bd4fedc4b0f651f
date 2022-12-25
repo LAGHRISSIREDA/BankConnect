@@ -1,0 +1,120 @@
+package com.codesigne.services.impl;
+
+import java.awt.print.Pageable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.codesigne.entities.UserEntity;
+import com.codesigne.repositories.UserRepository;
+import com.codesigne.services.UserService;
+import com.codesigne.shared.Utils;
+import com.codesigne.shared.dto.UserDto;
+
+
+
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	Utils util;
+	
+	@Override
+	public UserDto createUser(UserDto userDto) {
+		
+		UserEntity checkUser = userRepository.findByEmail(userDto.getEmail());
+		
+		//check if user Email already exist in data
+		if(checkUser != null) throw new RuntimeException("User Already Exists!");
+		
+		UserEntity userEntity = new UserEntity();
+		BeanUtils.copyProperties(userDto, userEntity);
+		
+		//
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+		userEntity.setUserId(util.generateUserId(32));
+		UserEntity newUser = userRepository.save();
+		
+		UserDto user = new UserDto();
+		BeanUtils.copyProperties(newUser, user);
+		return user;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null)throw new UsernameNotFoundException(email);
+		return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+	}
+
+	@Override
+	public UserDto getUser(String email) {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null)throw new UsernameNotFoundException(email);
+		UserDto userDto = new UserDto();
+		BeanUtils.copyProperties(userEntity, userDto);
+		return userDto;
+	}
+
+	@Override
+	public UserDto getUserByUserId(String userId) {
+		UserEntity userEntity = userRepository.findByUserId(userId);
+		if(userEntity == null)throw new UsernameNotFoundException(userId);
+		UserDto userDto = new UserDto();
+		BeanUtils.copyProperties(userEntity, userDto);
+		return userDto;
+	}
+
+	@Override
+	public UserDto updateUser(String userId, UserDto userDto) {
+		UserEntity userEntity = userRepository.findByUserId(userId);
+		if(userEntity == null)throw new UsernameNotFoundException(userId);
+		userEntity.setFirstname(userDto.getFirstname());
+		userEntity.setLastname(userDto.getLastname());
+		UserEntity userUpdated =  userRepository.save(userEntity);
+		
+		UserDto user = new UserDto();
+		BeanUtils.copyProperties(userUpdated, user);
+		return user;
+	}
+
+	@Override
+	public void deleteUser(String userId) {
+		UserEntity userEntity = userRepository.findByUserId(userId);
+		if(userEntity == null)throw new UsernameNotFoundException(userId);
+		userRepository.delete(userEntity);
+		
+	}
+
+	@Override
+	public List<UserDto> getUsers(int page, int limit) {
+		List<UserDto> usersDto = new ArrayList<>();
+		Pageable pageableRequest = (Pageable) PageRequest.of(page, limit);
+		Page<UserEntity> userPage = userRepository.findAll(pageableRequest);
+		List<UserEntity> users = userPage.getContent();
+		for(UserEntity userEntity:users) {
+			UserDto user = new UserDto();
+			BeanUtils.copyProperties(userEntity, user);
+			usersDto.add(user);
+		}
+		
+		return usersDto;
+	}
+
+}
