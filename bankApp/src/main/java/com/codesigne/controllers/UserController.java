@@ -28,6 +28,8 @@ import com.codesigne.responses.UserResponse;
 import com.codesigne.services.UserService;
 import com.codesigne.shared.dto.UserDto;
 
+import jakarta.validation.Valid;
+
 
 
 
@@ -61,7 +63,7 @@ public class UserController {
 	
 	@PostMapping(consumes ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
 							 produces ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) throws Exception {
+	public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest userRequest) throws Exception {
 		
 		if(userRequest.getFirstname().isEmpty())throw new UserException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		UserDto userDto = new UserDto();

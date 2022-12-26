@@ -1,15 +1,35 @@
 package com.codesigne.requests;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class UserRequest {
 	
+	@NotNull(message = "Ce champ ne doit etre null!")
+	@Size(min=3)
 	private String firstname;
+	
+	@NotBlank
+	@Size(min=3)
 	private String lastname;
+	
+	@NotNull
+	@Size(min=6)
 	private String adress;
+	
+	@Email
 	private String email;
 	private String phone;
 	private Double money;
 	private String typecompte;
 	private String status;
+	
+	@NotNull
+	@Size(min=6,max=12)
+	@Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",message = "password doit contenir majuscule minuscule number ..")
 	private String password;
 	
 	//getters and setters==================================================
